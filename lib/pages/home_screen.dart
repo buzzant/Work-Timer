@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
+import 'package:pomodoro_app/constants/date.dart';
 import 'package:pomodoro_app/widgets/navigation_drawer_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as devtools show log;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,8 +14,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  static const workTime = 10;
-  static const restTime = 10;
+  static const workTime = 60;
+  static const restTime = 60;
 
   int totalSeconds = workTime;
   int totalPomodoros = 0;
@@ -26,11 +28,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late SharedPreferences prefs;
   late int userTotalPomodoros;
   late int userTotalWorkTime;
+  late int userTodayWorkTime;
 
   Future initPrefs() async {
     prefs = await SharedPreferences.getInstance();
     userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
     userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
+    userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
     final userTimebyDate = prefs.getStringList('userTimebyDate');
     if (userTimebyDate == null) {
       await prefs.setStringList('userTimebyDate', []);
@@ -55,6 +59,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   void onTick(Timer timer) async {
     int userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
+    int userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
+    int userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
+    if (totalSeconds % 60 == 0 && isWorking && totalSeconds != workTime) {
+      userTotalWorkTime = userTotalWorkTime + 1;
+      userTodayWorkTime = userTodayWorkTime + 1;
+      await prefs.setInt('userTotalWorkTime', userTotalWorkTime);
+      await prefs.setInt(getDate(), userTodayWorkTime);
+      devtools.log('today : $userTodayWorkTime , total : $userTotalWorkTime');
+    }
     if (totalSeconds == 0) {
       setState(() {
         if (isWorking) {
@@ -141,10 +154,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Column(
               children: [
                 Text(
-                  isWorking ? 'Working...' : 'Taking a break...',
+                  isWorking
+                      ? (isRunning ? 'Working...' : 'Press Play to start timer')
+                      : 'Taking a break...',
                   style: TextStyle(
                     color: setColor(numColorScheme, isWorking),
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -177,7 +192,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         value: totalSeconds.toDouble() /
                             (isWorking ? workTime : restTime),
                         strokeWidth: 15,
-                        semanticsLabel: 'hi',
                         color: setColor(numColorScheme, isWorking),
                       ),
                       Row(
@@ -249,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Pomodoros',
+                          'Total Sessions',
                           style: TextStyle(
                             fontSize: 20,
                             color: setBackgroundColor(numColorScheme),

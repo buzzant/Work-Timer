@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
+import 'package:pomodoro_app/constants/date.dart';
+import 'package:pomodoro_app/widgets/bar_chart_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as devtools show log;
 
 class MyInfoPage extends StatefulWidget {
   final int numScheme;
@@ -11,10 +15,8 @@ class MyInfoPage extends StatefulWidget {
 }
 
 class _MyInfoPageState extends State<MyInfoPage> {
-  // late Future<SharedPreferences> prefs;
-  // late Future<int> prefsUserTotalPomodoros;
   int userTotalPomodoros = 9999;
-  // late int userTotalWorkTime = 9999;
+  int userTotalWorkTime = 9999;
 
   //needs finishing on time by Date
   initPrefs() {
@@ -25,27 +27,29 @@ class _MyInfoPageState extends State<MyInfoPage> {
     SharedPreferences.getInstance().then((value) {
       setState(() {
         userTotalPomodoros = value.getInt('userTotalPomodoros') ?? 0;
+        userTotalWorkTime = value.getInt('userTotalWorkTime') ?? 0;
+        for (int i = 0; i < 7; i++) {}
+        devtools.log(userTotalWorkTime.toString());
       });
     });
-    // userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
-    // final userTimebyDate = prefs.getStringList('userTimebyDate');
-    // if (userTimebyDate == null) {
-    //   await prefs.setStringList('userTimebyDate', []);
-    // }
   }
-
-  // dynamic getTotalPomodoros() async {
-  //   Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-  //   final SharedPreferences prefs = await prefs0;
-  //   int res = prefs.getInt('userTotalPomodoros') ?? 0;
-  //   print(res.toString());
-  //   return res;
-  // }
 
   @override
   void initState() {
     initPrefs();
     super.initState();
+  }
+
+  String formatHours(int minutes) {
+    int hour = minutes ~/ 60;
+    var f = NumberFormat('#######');
+    return f.format(hour).toString();
+  }
+
+  String formatMinutes(int minutes) {
+    int min = minutes % 60;
+    var f = NumberFormat('#######');
+    return f.format(min).toString();
   }
 
   // getUserTime(int cases) async {
@@ -64,19 +68,25 @@ class _MyInfoPageState extends State<MyInfoPage> {
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
+        backgroundColor:
+            setColorScheme(numScheme: widget.numScheme, numcolor: 0),
         appBar: AppBar(
           title: Text(
             'My Info',
             style: TextStyle(
-                color:
-                    setColorScheme(numScheme: widget.numScheme, numcolor: 3)),
+              color: setColorScheme(numScheme: widget.numScheme, numcolor: 3),
+            ),
           ),
           centerTitle: true,
+          elevation: 0,
+          foregroundColor:
+              setColorScheme(numScheme: widget.numScheme, numcolor: 3),
           backgroundColor:
               setColorScheme(numScheme: widget.numScheme, numcolor: 0),
         ),
         body: Column(
           children: [
+            const SizedBox(height: 10),
             Row(
               children: [
                 SizedBox(
@@ -84,8 +94,29 @@ class _MyInfoPageState extends State<MyInfoPage> {
                   width: 200,
                   child: Column(
                     children: [
-                      const Text('Total Work Time'),
-                      Text(userTotalPomodoros.toString()),
+                      Text(
+                        'Total Sessions',
+                        style: TextStyle(
+                          color: setColorScheme(
+                              numScheme: widget.numScheme, numcolor: 4),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            userTotalPomodoros.toString(),
+                            style: TextStyle(
+                              color: setColorScheme(
+                                  numScheme: widget.numScheme, numcolor: 3),
+                              fontSize: 50,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -94,13 +125,84 @@ class _MyInfoPageState extends State<MyInfoPage> {
                   width: 200,
                   child: Column(
                     children: [
-                      const Text('Total Work Time'),
-                      Text(userTotalPomodoros.toString()),
+                      Text(
+                        'Total Work Time',
+                        style: TextStyle(
+                          color: setColorScheme(
+                              numScheme: widget.numScheme, numcolor: 4),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            formatHours(userTotalWorkTime),
+                            style: TextStyle(
+                              color: setColorScheme(
+                                  numScheme: widget.numScheme, numcolor: 3),
+                              fontSize: 50,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            'h ',
+                            style: TextStyle(
+                              color: setColorScheme(
+                                  numScheme: widget.numScheme, numcolor: 4),
+                              fontSize: 50,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            formatMinutes(userTotalWorkTime),
+                            style: TextStyle(
+                              color: setColorScheme(
+                                  numScheme: widget.numScheme, numcolor: 3),
+                              fontSize: 50,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            'm ',
+                            style: TextStyle(
+                              color: setColorScheme(
+                                  numScheme: widget.numScheme, numcolor: 4),
+                              fontSize: 50,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
               ],
-            )
+            ),
+            Center(
+              child: Column(
+                children: [
+                  const Text("This Week's Work Time"),
+                  Padding(
+                    padding: const EdgeInsets.all(50),
+                    child: FutureBuilder(
+                      future: timebyDate,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return BarChartWidget(
+                            points: snapshot.data!,
+                            numScheme: widget.numScheme,
+                          );
+                        } else {
+                          return const Text('...');
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

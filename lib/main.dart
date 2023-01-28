@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/pages/home_screen.dart';
-import 'package:intl/intl.dart';
 
 void main() {
-  var now = DateTime.now();
-  var formatter = DateFormat('yyyy-MM-dd');
-  String formattedDate = formatter.format(now);
-  print(formattedDate);
   runApp(const MyApp());
 }
 
