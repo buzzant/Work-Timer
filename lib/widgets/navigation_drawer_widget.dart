@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/pages/my_info_page.dart';
 import 'package:pomodoro_app/pages/settings_page.dart';
 import 'package:pomodoro_app/pages/about_page.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);
-  const NavigationDrawerWidget({super.key});
+  final int numScheme;
+  const NavigationDrawerWidget({super.key, required this.numScheme});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Theme.of(context).colorScheme.background,
+        color: setColorScheme(numScheme: numScheme, numcolor: 0),
         child: ListView(
           padding: padding,
           children: <Widget>[
@@ -42,12 +44,12 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    const color = Colors.black;
-    final hoverColor = Colors.black.withOpacity(0.8);
+    Color color = setColorScheme(numScheme: numScheme, numcolor: 3);
+    final hoverColor = setColorScheme(numScheme: numScheme, numcolor: 3);
 
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(text, style: const TextStyle(color: color)),
+      title: Text(text, style: TextStyle(color: color)),
       hoverColor: hoverColor,
       onTap: onClicked,
     );
@@ -60,7 +62,7 @@ class NavigationDrawerWidget extends StatelessWidget {
       case 0:
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const MyInfoPage(),
+            builder: (context) => MyInfoPage(numScheme: numScheme),
           ),
         );
         break;
