@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/widgets/navigation_drawer_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,8 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  static const workTime = 500;
-  static const restTime = 100;
+  static const workTime = 10;
+  static const restTime = 10;
 
   int totalSeconds = workTime;
   int totalPomodoros = 0;
@@ -22,9 +23,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   double turns = 0.0;
   late Timer timer;
   late AnimationController _controller;
+  late SharedPreferences prefs;
+  late int userTotalPomodoros;
+  late int userTotalWorkTime;
+
+  Future initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+    userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
+    userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
+    final userTimebyDate = prefs.getStringList('userTimebyDate');
+    if (userTimebyDate == null) {
+      await prefs.setStringList('userTimebyDate', []);
+    }
+  }
 
   @override
   void initState() {
+    initPrefs();
     _controller = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this,
@@ -38,18 +53,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void onTick(Timer timer) {
+  void onTick(Timer timer) async {
+    int userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
     if (totalSeconds == 0) {
       setState(() {
         if (isWorking) {
           isWorking = !isWorking;
           totalSeconds = restTime;
           totalPomodoros = totalPomodoros + 1;
+          userTotalPomodoros = userTotalPomodoros + 1;
         } else {
           isWorking = !isWorking;
           totalSeconds = workTime;
         }
       });
+      await prefs.setInt('userTotalPomodoros', userTotalPomodoros);
     } else {
       setState(() {
         totalSeconds = totalSeconds - 1;

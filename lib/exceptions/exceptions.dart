@@ -1,0 +1,1 @@
+class PreferencesDataNotFoundException implements Exception {}
