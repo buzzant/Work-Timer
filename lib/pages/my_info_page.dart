@@ -7,8 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as devtools show log;
 
 class MyInfoPage extends StatefulWidget {
-  final int numScheme;
-  const MyInfoPage({super.key, required this.numScheme});
+  const MyInfoPage({super.key});
 
   @override
   State<MyInfoPage> createState() => _MyInfoPageState();
@@ -17,19 +16,18 @@ class MyInfoPage extends StatefulWidget {
 class _MyInfoPageState extends State<MyInfoPage> {
   int userTotalPomodoros = 9999;
   int userTotalWorkTime = 9999;
+  int userColorScheme = 999;
 
   //needs finishing on time by Date
   initPrefs() {
-    // Future<SharedPreferences> prefs0 = SharedPreferences.getInstance();
-    // final SharedPreferences prefs = await prefs0;
-    // prefs.getInt('userTotalWorkTime');
-    // prefs.getInt('userTotalPomodoros');
     SharedPreferences.getInstance().then((value) {
       setState(() {
         userTotalPomodoros = value.getInt('userTotalPomodoros') ?? 0;
         userTotalWorkTime = value.getInt('userTotalWorkTime') ?? 0;
+        userColorScheme = value.getInt('userColorScheme') ?? 0;
+        devtools.log('info page : ${userColorScheme.toString()}');
+        //below needs work
         for (int i = 0; i < 7; i++) {}
-        devtools.log(userTotalWorkTime.toString());
       });
     });
   }
@@ -69,20 +67,20 @@ class _MyInfoPageState extends State<MyInfoPage> {
     return Material(
       child: Scaffold(
         backgroundColor:
-            setColorScheme(numScheme: widget.numScheme, numcolor: 0),
+            setColorScheme(numScheme: userColorScheme, numcolor: 0),
         appBar: AppBar(
           title: Text(
             'My Info',
             style: TextStyle(
-              color: setColorScheme(numScheme: widget.numScheme, numcolor: 3),
+              color: setColorScheme(numScheme: userColorScheme, numcolor: 3),
             ),
           ),
           centerTitle: true,
           elevation: 0,
           foregroundColor:
-              setColorScheme(numScheme: widget.numScheme, numcolor: 3),
+              setColorScheme(numScheme: userColorScheme, numcolor: 3),
           backgroundColor:
-              setColorScheme(numScheme: widget.numScheme, numcolor: 0),
+              setColorScheme(numScheme: userColorScheme, numcolor: 0),
         ),
         body: Column(
           children: [
@@ -98,7 +96,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                         'Total Sessions',
                         style: TextStyle(
                           color: setColorScheme(
-                              numScheme: widget.numScheme, numcolor: 4),
+                              numScheme: userColorScheme, numcolor: 4),
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
                         ),
@@ -110,7 +108,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             userTotalPomodoros.toString(),
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: widget.numScheme, numcolor: 3),
+                                  numScheme: userColorScheme, numcolor: 3),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -129,7 +127,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                         'Total Work Time',
                         style: TextStyle(
                           color: setColorScheme(
-                              numScheme: widget.numScheme, numcolor: 4),
+                              numScheme: userColorScheme, numcolor: 4),
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
                         ),
@@ -141,7 +139,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             formatHours(userTotalWorkTime),
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: widget.numScheme, numcolor: 3),
+                                  numScheme: userColorScheme, numcolor: 3),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -150,7 +148,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             'h ',
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: widget.numScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 4),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -159,7 +157,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             formatMinutes(userTotalWorkTime),
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: widget.numScheme, numcolor: 3),
+                                  numScheme: userColorScheme, numcolor: 3),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -168,7 +166,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             'm ',
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: widget.numScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 4),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -192,7 +190,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                         if (snapshot.hasData) {
                           return BarChartWidget(
                             points: snapshot.data!,
-                            numScheme: widget.numScheme,
+                            numScheme: userColorScheme,
                           );
                         } else {
                           return const Text('...');

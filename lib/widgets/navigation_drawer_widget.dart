@@ -62,21 +62,21 @@ class NavigationDrawerWidget extends StatelessWidget {
       case 0:
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => MyInfoPage(numScheme: numScheme),
+            builder: (context) => const MyInfoPage(),
           ),
         );
         break;
       case 1:
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => SettingsPage(numScheme: numScheme),
+            builder: (context) => const SettingsPage(),
           ),
         );
         break;
       case 2:
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => AboutPage(numScheme: numScheme),
+            builder: (context) => const AboutPage(),
           ),
         );
         break;

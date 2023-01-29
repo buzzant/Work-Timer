@@ -34,5 +34,22 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFFF2DEBA).withOpacity(0.2);
       }
       break;
+
+    case 999:
+      switch (numcolor) {
+        case 0:
+          return Colors.red;
+        case 1:
+          return Colors.red;
+        case 2:
+          return Colors.red;
+        case 3:
+          return Colors.red;
+        case 4:
+          return Colors.red;
+        case 5:
+          return Colors.red;
+      }
+      break;
   }
 }

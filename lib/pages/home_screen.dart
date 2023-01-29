@@ -14,36 +14,55 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  static const workTime = 60;
-  static const restTime = 60;
+  static const workTime = 10;
+  static const restTime = 10;
 
   int totalSeconds = workTime;
   int totalPomodoros = 0;
-  int numColorScheme = 1;
   bool isRunning = false;
   bool isWorking = true;
   double turns = 0.0;
   late Timer timer;
   late AnimationController _controller;
   late SharedPreferences prefs;
-  late int userTotalPomodoros;
-  late int userTotalWorkTime;
-  late int userTodayWorkTime;
+  int userTotalPomodoros = 9999;
+  int userTotalWorkTime = 9999;
+  int userTodayWorkTime = 9999;
+  int userColorScheme = 999;
 
-  Future initPrefs() async {
+  initPrefs() {
+    // prefs = await SharedPreferences.getInstance();
+    // userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
+    // userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
+    // userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
+    // userColorScheme = prefs.getInt('userColorScheme') ?? 0;
+    // devtools.log(userColorScheme.toString());
+    // numColorScheme = userColorScheme;
+    // devtools.log(numColorScheme.toString());
+    // final userTimebyDate = prefs.getStringList('userTimebyDate');
+    // if (userTimebyDate == null) {
+    //   await prefs.setStringList('userTimebyDate', []);
+    // }
+
+    SharedPreferences.getInstance().then((value) {
+      setState(() {
+        userTotalPomodoros = value.getInt('userTotalPomodoros') ?? 0;
+        userTotalWorkTime = value.getInt('userTotalWorkTime') ?? 0;
+        userTodayWorkTime = value.getInt(getDate()) ?? 0;
+        userColorScheme = value.getInt('userColorScheme') ?? 0;
+        devtools.log('home screen : ${userColorScheme.toString()}');
+      });
+    });
+  }
+
+  initPref() async {
     prefs = await SharedPreferences.getInstance();
-    userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
-    userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
-    userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
-    final userTimebyDate = prefs.getStringList('userTimebyDate');
-    if (userTimebyDate == null) {
-      await prefs.setStringList('userTimebyDate', []);
-    }
   }
 
   @override
   void initState() {
     initPrefs();
+    initPref();
     _controller = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this,
@@ -58,9 +77,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void onTick(Timer timer) async {
-    int userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
-    int userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
-    int userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
+    // int userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
+    // int userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
+    // int userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
     if (totalSeconds % 60 == 0 && isWorking && totalSeconds != workTime) {
       userTotalWorkTime = userTotalWorkTime + 1;
       userTodayWorkTime = userTodayWorkTime + 1;
@@ -140,13 +159,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(numScheme: numColorScheme),
+      drawer: NavigationDrawerWidget(numScheme: userColorScheme),
       appBar: AppBar(
-        foregroundColor: setColor(numColorScheme, isWorking),
-        backgroundColor: setBackgroundColor(numColorScheme),
+        foregroundColor: setColor(userColorScheme, isWorking),
+        backgroundColor: setBackgroundColor(userColorScheme),
         elevation: 0,
       ),
-      backgroundColor: setBackgroundColor(numColorScheme),
+      backgroundColor: setBackgroundColor(userColorScheme),
       body: Column(
         children: [
           Flexible(
@@ -158,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ? (isRunning ? 'Working...' : 'Press Play to start timer')
                       : 'Taking a break...',
                   style: TextStyle(
-                    color: setColor(numColorScheme, isWorking),
+                    color: setColor(userColorScheme, isWorking),
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
@@ -168,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   child: Text(
                     format(totalSeconds),
                     style: TextStyle(
-                      color: setColor(numColorScheme, isWorking),
+                      color: setColor(userColorScheme, isWorking),
                       fontSize: 89,
                       fontWeight: FontWeight.w600,
                     ),
@@ -192,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         value: totalSeconds.toDouble() /
                             (isWorking ? workTime : restTime),
                         strokeWidth: 15,
-                        color: setColor(numColorScheme, isWorking),
+                        color: setColor(userColorScheme, isWorking),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -211,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               icon: AnimatedIcons.play_pause,
                               progress: _controller,
                               size: 75,
-                              color: setColor(numColorScheme, isWorking),
+                              color: setColor(userColorScheme, isWorking),
                             ),
                           ),
                           Padding(
@@ -221,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: setColor(numColorScheme, isWorking),
+                                color: setColor(userColorScheme, isWorking),
                               ),
                             ),
                           ),
@@ -233,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               child: Icon(
                                 Icons.restart_alt_rounded,
                                 size: 60,
-                                color: setColor(numColorScheme, isWorking),
+                                color: setColor(userColorScheme, isWorking),
                               ),
                             ),
                           ),
@@ -253,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: setColor(numColorScheme, isWorking),
+                      color: setColor(userColorScheme, isWorking),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(50),
                         topRight: Radius.circular(50),
@@ -266,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           'Total Sessions',
                           style: TextStyle(
                             fontSize: 20,
-                            color: setBackgroundColor(numColorScheme),
+                            color: setBackgroundColor(userColorScheme),
                           ),
                         ),
                         Text(
@@ -274,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 58,
                             fontWeight: FontWeight.w600,
-                            color: setBackgroundColor(numColorScheme),
+                            color: setBackgroundColor(userColorScheme),
                           ),
                         ),
                       ],

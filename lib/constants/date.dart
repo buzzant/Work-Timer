@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:collection/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 String getDate() {
   var now = DateTime.now();
@@ -19,8 +18,6 @@ String getNameofDate(int diff) {
   var diffDate = DateTime.now().subtract(Duration(days: diff));
   var formatter = DateFormat('EEEE');
   String longDate = formatter.format(diffDate);
-  devtools.log(longDate);
-  devtools.log(diff.toString());
   switch (longDate) {
     case 'Monday':
       return 'MON';
@@ -53,8 +50,6 @@ Future<List<TimebyDate>> get timebyDate async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   for (int i = 6; i >= 0; i--) {
     workTimeList.add(prefs.getInt(getPreviousDate(i)) ?? 0);
-    devtools.log(i.toString());
-    devtools.log(workTimeList.toString());
   }
 
   return workTimeList
