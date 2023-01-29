@@ -14,6 +14,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFF2F4858);
         case 4:
           return Colors.black;
+        case 5:
+          return const Color(0xFFF3EED9).withOpacity(0.2);
       }
       break;
     case 1:
@@ -28,6 +30,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFF2F4858);
         case 4:
           return const Color(0xFF402E32);
+        case 5:
+          return const Color(0xFFF2DEBA).withOpacity(0.2);
       }
       break;
   }
