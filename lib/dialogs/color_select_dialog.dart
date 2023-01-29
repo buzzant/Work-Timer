@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/widgets/color_select_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as devtools show log;
 
 ColorSelectRouteBuilder(int numColorScheme) {
   return PageRouteBuilder(
     opaque: false,
     barrierDismissible: true,
     transitionDuration: const Duration(milliseconds: 500),
-    barrierColor: setColorScheme(numScheme: 1, numcolor: 5),
+    barrierColor: setColorScheme(numScheme: numColorScheme, numcolor: 5),
     pageBuilder: (BuildContext context, _, __) {
       return AlertDialog(
         backgroundColor: setColorScheme(numScheme: numColorScheme, numcolor: 0),
@@ -31,7 +32,9 @@ ColorSelectRouteBuilder(int numColorScheme) {
         ),
         actions: <Widget>[
           TextButton(
-            onPressed: Navigator.of(context).pop,
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
             child: Text(
               'Cancel',
               style: TextStyle(
@@ -41,10 +44,11 @@ ColorSelectRouteBuilder(int numColorScheme) {
           ),
           TextButton(
             onPressed: () {
+              Navigator.of(context).pop(true);
               SharedPreferences.getInstance().then((value) {
-                value
-                    .setInt('userColorScheme', numColorScheme)
-                    .then((value) => Navigator.of(context).pop);
+                value.setInt('userColorScheme', numColorScheme);
+                devtools
+                    .log('color dialog set to : ${numColorScheme.toString()}');
               });
             },
             child: Text(

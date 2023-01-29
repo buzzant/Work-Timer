@@ -37,6 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    initPrefs();
     return Material(
       child: Scaffold(
         backgroundColor:
@@ -65,8 +66,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(ColorSelectRouteBuilder(0));
-                      setState(() {});
+                      Navigator.of(context)
+                          .push(ColorSelectRouteBuilder(0))
+                          .then((value) => initPrefs());
                     },
                     child: const Hero(
                       tag: 0,
@@ -75,8 +77,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(ColorSelectRouteBuilder(1));
-                      setState(() {});
+                      Navigator.of(context)
+                          .push(ColorSelectRouteBuilder(1))
+                          .then((value) => initPrefs());
                     },
                     child: const Hero(
                       tag: 1,

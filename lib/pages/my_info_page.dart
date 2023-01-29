@@ -27,7 +27,6 @@ class _MyInfoPageState extends State<MyInfoPage> {
         userColorScheme = value.getInt('userColorScheme') ?? 0;
         devtools.log('info page : ${userColorScheme.toString()}');
         //below needs work
-        for (int i = 0; i < 7; i++) {}
       });
     });
   }
