@@ -68,6 +68,15 @@ class _MyInfoPageState extends State<MyInfoPage> {
         backgroundColor:
             setColorScheme(numScheme: userColorScheme, numcolor: 0),
         appBar: AppBar(
+          leading: GestureDetector(
+            child: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: setColorScheme(numScheme: userColorScheme, numcolor: 3),
+            ),
+            onTap: () {
+              Navigator.of(context).pop(false);
+            },
+          ),
           title: Text(
             'My Info',
             style: TextStyle(
@@ -75,7 +84,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
             ),
           ),
           centerTitle: true,
-          elevation: 0,
+          elevation: 1,
           foregroundColor:
               setColorScheme(numScheme: userColorScheme, numcolor: 3),
           backgroundColor:
@@ -95,7 +104,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                         'Total Sessions',
                         style: TextStyle(
                           color: setColorScheme(
-                              numScheme: userColorScheme, numcolor: 4),
+                              numScheme: userColorScheme, numcolor: 3),
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
                         ),
@@ -107,7 +116,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             userTotalPomodoros.toString(),
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 3),
+                                  numScheme: userColorScheme, numcolor: 1),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -126,7 +135,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                         'Total Work Time',
                         style: TextStyle(
                           color: setColorScheme(
-                              numScheme: userColorScheme, numcolor: 4),
+                              numScheme: userColorScheme, numcolor: 3),
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
                         ),
@@ -138,7 +147,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             formatHours(userTotalWorkTime),
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 3),
+                                  numScheme: userColorScheme, numcolor: 1),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -147,7 +156,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             'h ',
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 3),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -156,7 +165,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             formatMinutes(userTotalWorkTime),
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 3),
+                                  numScheme: userColorScheme, numcolor: 1),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -165,7 +174,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                             'm ',
                             style: TextStyle(
                               color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 3),
                               fontSize: 50,
                               fontWeight: FontWeight.w500,
                             ),
@@ -179,8 +188,17 @@ class _MyInfoPageState extends State<MyInfoPage> {
             ),
             Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text("This Week's Work Time"),
+                  Text(
+                    "This Week's Work Time",
+                    style: TextStyle(
+                      color: setColorScheme(
+                          numScheme: userColorScheme, numcolor: 3),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(50),
                     child: FutureBuilder(

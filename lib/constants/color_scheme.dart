@@ -5,16 +5,22 @@ setColorScheme({required int numScheme, required int numcolor}) {
     case 0:
       switch (numcolor) {
         case 0:
+          //background color
           return const Color(0xFFF3EED9);
         case 1:
-          return const Color(0xFFF55050);
+          //work time color
+          return const Color(0xFFF98E72);
         case 2:
+          //rest time color
           return const Color(0xFF3C537A);
         case 3:
+          //text color
           return const Color(0xFF2F4858);
         case 4:
-          return Colors.black;
+          //background color for color select dialog
+          return const Color(0xFFF3EED9).withOpacity(0.5);
         case 5:
+          //color for outside of color select dialog
           return const Color(0xFFF3EED9).withOpacity(0.2);
       }
       break;
@@ -29,7 +35,7 @@ setColorScheme({required int numScheme, required int numcolor}) {
         case 3:
           return const Color(0xFF2F4858);
         case 4:
-          return const Color(0xFF402E32);
+          return const Color(0xFFF2DEBA).withOpacity(0.5);
         case 5:
           return const Color(0xFFF2DEBA).withOpacity(0.2);
       }
@@ -42,11 +48,11 @@ setColorScheme({required int numScheme, required int numcolor}) {
         case 1:
           return const Color(0xFFE38072);
         case 2:
-          return const Color(0xFFD1A617);
+          return const Color(0xFFF7C840);
         case 3:
           return const Color(0xFFEBEEFF);
         case 4:
-          return const Color(0xFFEBEEFF);
+          return const Color(0xFF282A3A).withOpacity(0.5);
         case 5:
           return const Color(0xFF282A3A).withOpacity(0.2);
       }
@@ -57,13 +63,13 @@ setColorScheme({required int numScheme, required int numcolor}) {
         case 0:
           return const Color(0xFF222831);
         case 1:
-          return const Color(0xFFF05454);
+          return const Color(0xFFE9B9D1);
         case 2:
-          return const Color(0xFF2FAD8C);
+          return const Color(0xFFA1ACBD);
         case 3:
           return const Color(0xFFDBF2FF);
         case 4:
-          return const Color(0xFFDBF2FF);
+          return const Color(0xFF222831).withOpacity(0.5);
         case 5:
           return const Color(0xFF222831).withOpacity(0.2);
       }

@@ -19,20 +19,38 @@ class NavigationDrawerWidget extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 48),
             buildMenuItem(
-              text: 'My Info',
-              icon: Icons.person_outline,
-              onClicked: () => selectedItem(context, 0),
-            ),
+                text: 'My Info',
+                icon: Icons.person_outline,
+                onClicked: () async {
+                  Navigator.of(context).pop();
+                  final result = await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const MyInfoPage(),
+                    ),
+                  );
+                }),
             buildMenuItem(
-              text: 'Settings',
-              icon: Icons.settings,
-              onClicked: () => selectedItem(context, 1),
-            ),
+                text: 'Settings',
+                icon: Icons.settings,
+                onClicked: () async {
+                  Navigator.of(context).pop();
+                  final result = await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsPage(),
+                    ),
+                  );
+                }),
             buildMenuItem(
-              text: 'About',
-              icon: Icons.info_outline_rounded,
-              onClicked: () => selectedItem(context, 2),
-            ),
+                text: 'About',
+                icon: Icons.info_outline_rounded,
+                onClicked: () async {
+                  Navigator.of(context).pop();
+                  final result = await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AboutPage(),
+                    ),
+                  );
+                }),
           ],
         ),
       ),

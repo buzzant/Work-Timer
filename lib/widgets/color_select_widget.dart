@@ -10,8 +10,8 @@ class ColorSelectWidget extends StatefulWidget {
 }
 
 class _ColorSelectWidgetState extends State<ColorSelectWidget> {
-  final double _height = 150;
-  final double _width = 150;
+  final double _height = 140;
+  final double _width = 140;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

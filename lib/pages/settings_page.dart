@@ -43,6 +43,15 @@ class _SettingsPageState extends State<SettingsPage> {
         backgroundColor:
             setColorScheme(numScheme: userColorScheme, numcolor: 0),
         appBar: AppBar(
+          leading: GestureDetector(
+            child: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: setColorScheme(numScheme: userColorScheme, numcolor: 3),
+            ),
+            onTap: () {
+              Navigator.of(context).pop(false);
+            },
+          ),
           title: Text(
             'Settings',
             style: TextStyle(
@@ -50,7 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           centerTitle: true,
-          elevation: 0,
+          elevation: 1,
           foregroundColor:
               setColorScheme(numScheme: userColorScheme, numcolor: 3),
           backgroundColor:
@@ -58,62 +67,154 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         body: Column(
           children: [
-            const Text('Set color'),
+            const SizedBox(height: 20),
+            Text(
+              'Set color',
+              style: TextStyle(
+                color: setColorScheme(numScheme: userColorScheme, numcolor: 3),
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(ColorSelectRouteBuilder(0))
-                          .then((value) => initPrefs());
-                    },
-                    child: const Hero(
-                      tag: 0,
-                      child: ColorSelectWidget(numColorScheme: 0),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: setColorScheme(
+                          numScheme: userColorScheme, numcolor: 4),
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(
+                        width: 4,
+                        color: userColorScheme == 0
+                            ? setColorScheme(
+                                numScheme: userColorScheme, numcolor: 1)
+                            : setColorScheme(
+                                numScheme: userColorScheme, numcolor: 4),
+                      ),
+                    ),
+                    child: SizedBox(
+                      height: 160,
+                      width: 160,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(ColorSelectRouteBuilder(0))
+                                .then((value) => initPrefs());
+                          },
+                          child: const Hero(
+                            tag: 0,
+                            child: ColorSelectWidget(numColorScheme: 0),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(ColorSelectRouteBuilder(1))
-                          .then((value) => initPrefs());
-                    },
-                    child: const Hero(
-                      tag: 1,
-                      child: ColorSelectWidget(numColorScheme: 1),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: setColorScheme(
+                          numScheme: userColorScheme, numcolor: 4),
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(
+                        width: 4,
+                        color: userColorScheme == 1
+                            ? setColorScheme(
+                                numScheme: userColorScheme, numcolor: 1)
+                            : setColorScheme(
+                                numScheme: userColorScheme, numcolor: 4),
+                      ),
+                    ),
+                    child: SizedBox(
+                      height: 160,
+                      width: 160,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(ColorSelectRouteBuilder(1))
+                                .then((value) => initPrefs());
+                          },
+                          child: const Hero(
+                            tag: 1,
+                            child: ColorSelectWidget(numColorScheme: 1),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(ColorSelectRouteBuilder(2))
-                          .then((value) => initPrefs());
-                    },
-                    child: const Hero(
-                      tag: 2,
-                      child: ColorSelectWidget(numColorScheme: 2),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: setColorScheme(
+                          numScheme: userColorScheme, numcolor: 4),
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(
+                        width: 4,
+                        color: userColorScheme == 2
+                            ? setColorScheme(
+                                numScheme: userColorScheme, numcolor: 1)
+                            : setColorScheme(
+                                numScheme: userColorScheme, numcolor: 4),
+                      ),
+                    ),
+                    child: SizedBox(
+                      height: 160,
+                      width: 160,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(ColorSelectRouteBuilder(2))
+                                .then((value) => initPrefs());
+                          },
+                          child: const Hero(
+                            tag: 2,
+                            child: ColorSelectWidget(numColorScheme: 2),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(ColorSelectRouteBuilder(3))
-                          .then((value) => initPrefs());
-                    },
-                    child: const Hero(
-                      tag: 3,
-                      child: ColorSelectWidget(numColorScheme: 3),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: setColorScheme(
+                          numScheme: userColorScheme, numcolor: 4),
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(
+                        width: 4,
+                        color: userColorScheme == 3
+                            ? setColorScheme(
+                                numScheme: userColorScheme, numcolor: 1)
+                            : setColorScheme(
+                                numScheme: userColorScheme, numcolor: 4),
+                      ),
+                    ),
+                    child: SizedBox(
+                      height: 160,
+                      width: 160,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(ColorSelectRouteBuilder(3))
+                                .then((value) => initPrefs());
+                          },
+                          child: const Hero(
+                            tag: 3,
+                            child: ColorSelectWidget(numColorScheme: 3),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

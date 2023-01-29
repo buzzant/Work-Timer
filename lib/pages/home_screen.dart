@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/constants/date.dart';
-import 'package:pomodoro_app/widgets/navigation_drawer_widget.dart';
+import 'package:pomodoro_app/pages/about_page.dart';
+import 'package:pomodoro_app/pages/my_info_page.dart';
+import 'package:pomodoro_app/pages/settings_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as devtools show log;
 
@@ -143,10 +145,90 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  Widget buildMenuItem({
+    required String text,
+    required IconData icon,
+    VoidCallback? onClicked,
+  }) {
+    Color color = setColorScheme(numScheme: userColorScheme, numcolor: 3);
+    final hoverColor = setColorScheme(numScheme: userColorScheme, numcolor: 3);
+
+    return ListTile(
+      leading: Icon(icon, color: color),
+      title: Text(text, style: TextStyle(color: color)),
+      hoverColor: hoverColor,
+      onTap: onClicked,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(numScheme: userColorScheme),
+      drawer: Drawer(
+        child: Material(
+          color: setColorScheme(numScheme: userColorScheme, numcolor: 0),
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            children: <Widget>[
+              const SizedBox(height: 48),
+              buildMenuItem(
+                  text: 'My Info',
+                  icon: Icons.person_outline,
+                  onClicked: () async {
+                    Navigator.of(context).pop();
+                    final result = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MyInfoPage(),
+                      ),
+                    );
+                    SharedPreferences.getInstance().then((value) {
+                      setState(() {
+                        userColorScheme = value.getInt('userColorScheme') ?? 0;
+                        devtools
+                            .log('exit info : ${userColorScheme.toString()}');
+                      });
+                    });
+                  }),
+              buildMenuItem(
+                  text: 'Settings',
+                  icon: Icons.settings,
+                  onClicked: () async {
+                    Navigator.of(context).pop();
+                    final result = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                    SharedPreferences.getInstance().then((value) {
+                      setState(() {
+                        userColorScheme = value.getInt('userColorScheme') ?? 0;
+                        devtools.log(
+                            'exit settings : ${userColorScheme.toString()}');
+                      });
+                    });
+                  }),
+              buildMenuItem(
+                  text: 'About',
+                  icon: Icons.info_outline_rounded,
+                  onClicked: () async {
+                    Navigator.of(context).pop();
+                    final result = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const AboutPage(),
+                      ),
+                    );
+                    SharedPreferences.getInstance().then((value) {
+                      setState(() {
+                        userColorScheme = value.getInt('userColorScheme') ?? 0;
+                        devtools
+                            .log('exit about : ${userColorScheme.toString()}');
+                      });
+                    });
+                  }),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         foregroundColor: setColor(userColorScheme, isWorking),
         backgroundColor: setBackgroundColor(userColorScheme),

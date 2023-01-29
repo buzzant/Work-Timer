@@ -14,7 +14,12 @@ ColorSelectRouteBuilder(int numColorScheme) {
         backgroundColor: setColorScheme(numScheme: numColorScheme, numcolor: 0),
         elevation: 10,
         shadowColor: Colors.black,
-        title: const Text('Select color'),
+        title: Text(
+          'Select color',
+          style: TextStyle(
+            color: setColorScheme(numScheme: numColorScheme, numcolor: 3),
+          ),
+        ),
         content: Container(
           decoration: BoxDecoration(
               color: setColorScheme(numScheme: numColorScheme, numcolor: 0)),
@@ -37,7 +42,7 @@ ColorSelectRouteBuilder(int numColorScheme) {
             child: Text(
               'Cancel',
               style: TextStyle(
-                color: setColorScheme(numScheme: numColorScheme, numcolor: 4),
+                color: setColorScheme(numScheme: numColorScheme, numcolor: 3),
               ),
             ),
           ),

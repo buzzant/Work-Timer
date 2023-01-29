@@ -40,6 +40,15 @@ class _AboutPageState extends State<AboutPage> {
         backgroundColor:
             setColorScheme(numScheme: userColorScheme, numcolor: 0),
         appBar: AppBar(
+          leading: GestureDetector(
+            child: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: setColorScheme(numScheme: userColorScheme, numcolor: 3),
+            ),
+            onTap: () {
+              Navigator.of(context).pop(false);
+            },
+          ),
           title: Text(
             'About',
             style: TextStyle(
@@ -47,7 +56,7 @@ class _AboutPageState extends State<AboutPage> {
             ),
           ),
           centerTitle: true,
-          elevation: 0,
+          elevation: 1,
           foregroundColor:
               setColorScheme(numScheme: userColorScheme, numcolor: 3),
           backgroundColor:
