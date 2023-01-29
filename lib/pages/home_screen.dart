@@ -31,19 +31,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int userColorScheme = 999;
 
   initPrefs() {
-    // prefs = await SharedPreferences.getInstance();
-    // userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
-    // userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
-    // userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
-    // userColorScheme = prefs.getInt('userColorScheme') ?? 0;
-    // devtools.log(userColorScheme.toString());
-    // numColorScheme = userColorScheme;
-    // devtools.log(numColorScheme.toString());
-    // final userTimebyDate = prefs.getStringList('userTimebyDate');
-    // if (userTimebyDate == null) {
-    //   await prefs.setStringList('userTimebyDate', []);
-    // }
-
     SharedPreferences.getInstance().then((value) {
       setState(() {
         userTotalPomodoros = value.getInt('userTotalPomodoros') ?? 0;

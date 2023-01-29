@@ -88,6 +88,36 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ],
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(ColorSelectRouteBuilder(2))
+                          .then((value) => initPrefs());
+                    },
+                    child: const Hero(
+                      tag: 2,
+                      child: ColorSelectWidget(numColorScheme: 2),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(ColorSelectRouteBuilder(3))
+                          .then((value) => initPrefs());
+                    },
+                    child: const Hero(
+                      tag: 3,
+                      child: ColorSelectWidget(numColorScheme: 3),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

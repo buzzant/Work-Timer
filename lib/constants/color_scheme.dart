@@ -35,6 +35,40 @@ setColorScheme({required int numScheme, required int numcolor}) {
       }
       break;
 
+    case 2:
+      switch (numcolor) {
+        case 0:
+          return const Color(0xFF282A3A);
+        case 1:
+          return const Color(0xFFE38072);
+        case 2:
+          return const Color(0xFFD1A617);
+        case 3:
+          return const Color(0xFFEBEEFF);
+        case 4:
+          return const Color(0xFFEBEEFF);
+        case 5:
+          return const Color(0xFF282A3A).withOpacity(0.2);
+      }
+      break;
+
+    case 3:
+      switch (numcolor) {
+        case 0:
+          return const Color(0xFF222831);
+        case 1:
+          return const Color(0xFFF05454);
+        case 2:
+          return const Color(0xFF2FAD8C);
+        case 3:
+          return const Color(0xFFDBF2FF);
+        case 4:
+          return const Color(0xFFDBF2FF);
+        case 5:
+          return const Color(0xFF222831).withOpacity(0.2);
+      }
+      break;
+
     case 999:
       switch (numcolor) {
         case 0:

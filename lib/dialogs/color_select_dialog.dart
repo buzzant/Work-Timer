@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/widgets/color_select_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 ColorSelectRouteBuilder(int numColorScheme) {
   return PageRouteBuilder(
@@ -47,8 +46,6 @@ ColorSelectRouteBuilder(int numColorScheme) {
               Navigator.of(context).pop(true);
               SharedPreferences.getInstance().then((value) {
                 value.setInt('userColorScheme', numColorScheme);
-                devtools
-                    .log('color dialog set to : ${numColorScheme.toString()}');
               });
             },
             child: Text(
