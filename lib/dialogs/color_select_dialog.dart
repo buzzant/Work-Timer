@@ -14,23 +14,22 @@ ColorSelectRouteBuilder(int numColorScheme) {
         backgroundColor: setColorScheme(numScheme: numColorScheme, numcolor: 0),
         elevation: 10,
         shadowColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40),
+        ),
         title: Text(
           'Select color',
           style: TextStyle(
             color: setColorScheme(numScheme: numColorScheme, numcolor: 3),
           ),
         ),
-        content: Container(
-          decoration: BoxDecoration(
-              color: setColorScheme(numScheme: numColorScheme, numcolor: 0)),
-          child: SizedBox(
-            height: 200,
-            width: 200,
-            child: Center(
-              child: Hero(
-                tag: numColorScheme,
-                child: ColorSelectWidget(numColorScheme: numColorScheme),
-              ),
+        content: SizedBox(
+          height: 200,
+          width: 200,
+          child: Center(
+            child: Hero(
+              tag: numColorScheme,
+              child: ColorSelectWidget(numColorScheme: numColorScheme),
             ),
           ),
         ),

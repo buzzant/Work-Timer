@@ -18,6 +18,8 @@ class _MyInfoPageState extends State<MyInfoPage> {
   int userTotalWorkTime = 9999;
   int userColorScheme = 999;
 
+  List<int> workTimeList = <int>[];
+
   //needs finishing on time by Date
   initPrefs() {
     SharedPreferences.getInstance().then((value) {
@@ -31,9 +33,19 @@ class _MyInfoPageState extends State<MyInfoPage> {
     });
   }
 
+  initData() {
+    SharedPreferences.getInstance().then((value) {
+      for (int i = 6; i >= 0; i--) {
+        workTimeList.add(value.getInt(getPreviousDate(i)) ?? 0);
+        devtools.log((value.getInt(getPreviousDate(i)) ?? 0).toString());
+      }
+    });
+  }
+
   @override
   void initState() {
     initPrefs();
+    initData();
     super.initState();
   }
 
@@ -91,8 +103,9 @@ class _MyInfoPageState extends State<MyInfoPage> {
               setColorScheme(numScheme: userColorScheme, numcolor: 0),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 10),
+            const SizedBox(height: 50),
             Row(
               children: [
                 SizedBox(
@@ -190,24 +203,15 @@ class _MyInfoPageState extends State<MyInfoPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "This Week's Work Time",
-                    style: TextStyle(
-                      color: setColorScheme(
-                          numScheme: userColorScheme, numcolor: 3),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
                   Padding(
-                    padding: const EdgeInsets.all(50),
+                    padding: const EdgeInsets.all(20),
                     child: FutureBuilder(
                       future: timebyDate,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return BarChartWidget(
-                            points: snapshot.data!,
-                            numScheme: userColorScheme,
+                          return BarChartSample1(
+                            userColorScheme: userColorScheme,
+                            workTimeList: workTimeList,
                           );
                         } else {
                           return const Text('...');

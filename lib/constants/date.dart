@@ -38,6 +38,13 @@ String getNameofDate(int diff) {
   }
 }
 
+// int getTimeofDate(int diff) {
+//   SharedPreferences.getInstance().then((value) {
+//     int time = value.getInt(getPreviousDate(diff)) ?? 0;
+//   });
+
+// }
+
 class TimebyDate {
   final int index;
   final int timeofDate;

@@ -22,6 +22,9 @@ setColorScheme({required int numScheme, required int numcolor}) {
         case 5:
           //color for outside of color select dialog
           return const Color(0xFFF3EED9).withOpacity(0.2);
+        case 6:
+          //color for graph background
+          return const Color(0xFF4E4637);
       }
       break;
     case 1:
@@ -38,6 +41,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFFF2DEBA).withOpacity(0.5);
         case 5:
           return const Color(0xFFF2DEBA).withOpacity(0.2);
+        case 6:
+          return const Color(0xFF4E4637);
       }
       break;
 
@@ -55,6 +60,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFF282A3A).withOpacity(0.5);
         case 5:
           return const Color(0xFF282A3A).withOpacity(0.2);
+        case 6:
+          return const Color(0xFF604463);
       }
       break;
 
@@ -72,6 +79,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFF222831).withOpacity(0.5);
         case 5:
           return const Color(0xFF222831).withOpacity(0.2);
+        case 6:
+          return const Color(0xFF1F5063);
       }
       break;
 
