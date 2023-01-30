@@ -431,13 +431,27 @@ class _SettingsPageState extends State<SettingsPage> {
                           ))
                           .then((value) => initPrefs());
                     },
-                    child: Text(
-                      'Change Sound',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: setColorScheme(
-                            numScheme: userColorScheme, numcolor: 3),
+                    child: Container(
+                      height: 35,
+                      width: 130,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: setColorScheme(
+                              numScheme: userColorScheme, numcolor: 3),
+                          width: 3,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Change Sound',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: setColorScheme(
+                                numScheme: userColorScheme, numcolor: 3),
+                          ),
+                        ),
                       ),
                     ),
                   ),
