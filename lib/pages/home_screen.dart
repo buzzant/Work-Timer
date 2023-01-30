@@ -215,16 +215,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         timer.cancel();
                         isWorking = true;
                         totalPomodoros = 0;
-
                         devtools.log(
                             'exit settings : ${userColorScheme.toString()}, ${userWorkTime.toString()}, ${userRestTime.toString()}, ');
                       });
+                      initPrefs();
                     });
                   }),
               buildMenuItem(
                   text: 'About',
                   icon: Icons.info_outline_rounded,
                   onClicked: () async {
+                    initPrefs();
                     Navigator.of(context).pop();
                     final result = await Navigator.of(context).push(
                       MaterialPageRoute(

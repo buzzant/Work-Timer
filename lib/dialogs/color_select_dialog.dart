@@ -16,6 +16,9 @@ ColorSelectRouteBuilder(int numColorScheme) {
         shadowColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
+          side: BorderSide(
+            color: setColorScheme(numScheme: numColorScheme, numcolor: 7),
+          ),
         ),
         title: Text(
           'Select color',

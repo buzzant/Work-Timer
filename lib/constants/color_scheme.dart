@@ -29,8 +29,11 @@ setColorScheme({required int numScheme, required int numcolor}) {
           //color for info text
           return Colors.black;
         case 8:
-          //work time color
+          //work time select color
           return const Color(0xFFF98E72).withOpacity(0.15);
+        case 9:
+          //rest time select color
+          return const Color(0xFF3C537A).withOpacity(0.15);
       }
       break;
     case 1:
@@ -53,6 +56,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return Colors.black;
         case 8:
           return const Color(0xFF820000).withOpacity(0.15);
+        case 9:
+          return const Color(0xFF4E6C50).withOpacity(0.15);
       }
       break;
 
@@ -76,6 +81,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return Colors.white;
         case 8:
           return const Color(0xFFE38072).withOpacity(0.15);
+        case 9:
+          return const Color(0xFFF7C840).withOpacity(0.15);
       }
       break;
 
@@ -99,6 +106,8 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return Colors.white;
         case 8:
           return const Color(0xFFE9B9D1).withOpacity(0.15);
+        case 9:
+          return const Color(0xFFA1ACBD).withOpacity(0.15);
       }
       break;
 

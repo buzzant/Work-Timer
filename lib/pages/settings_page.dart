@@ -237,18 +237,51 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context)
-                    .push(TimeSelectRouteBuilder(
-                      userColorScheme,
-                      formatTime(userWorkTime, 'hour'),
-                      formatTime(userWorkTime, 'min'),
-                      formatTime(userWorkTime, 'sec'),
-                    ))
-                    .then((value) => initPrefs());
-              },
-              child: const Text('time set'),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(WorkTimeSelectRouteBuilder(
+                          userColorScheme,
+                          formatTime(userWorkTime, 'hour'),
+                          formatTime(userWorkTime, 'min'),
+                          formatTime(userWorkTime, 'sec'),
+                        ))
+                        .then((value) => initPrefs());
+                  },
+                  child: Text(
+                    'Change Work time',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: setColorScheme(
+                          numScheme: userColorScheme, numcolor: 3),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(RestTimeSelectRouteBuilder(
+                          userColorScheme,
+                          formatTime(userRestTime, 'hour'),
+                          formatTime(userRestTime, 'min'),
+                          formatTime(userRestTime, 'sec'),
+                        ))
+                        .then((value) => initPrefs());
+                  },
+                  child: Text(
+                    'Change Rest Time',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: setColorScheme(
+                          numScheme: userColorScheme, numcolor: 3),
+                    ),
+                  ),
+                ),
+              ],
             )
           ],
         ),
