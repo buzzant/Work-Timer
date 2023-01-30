@@ -59,6 +59,8 @@ class _SettingsPageState extends State<SettingsPage> {
     var duration = Duration(seconds: seconds);
     if (seconds < 3600) {
       return duration.toString().substring(2, 7);
+    } else if (seconds >= 43200) {
+      return duration.toString().substring(0, 8);
     } else {
       return duration.toString().substring(0, 7);
     }
