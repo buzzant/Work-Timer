@@ -25,6 +25,7 @@ WorkTimeSelectRouteBuilder(
     pageBuilder: (BuildContext context, _, __) {
       return AlertDialog(
         backgroundColor: setColorScheme(numScheme: numColorScheme, numcolor: 0),
+        elevation: 1,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
             side: BorderSide(
@@ -37,7 +38,7 @@ WorkTimeSelectRouteBuilder(
           ),
         ),
         content: SizedBox(
-          height: 400,
+          height: 300,
           width: 400,
           child: Stack(
             children: [
@@ -66,8 +67,8 @@ WorkTimeSelectRouteBuilder(
                       },
                       controller: controllerHour,
                       itemExtent: 50,
-                      perspective: 0.003,
-                      diameterRatio: 0.7,
+                      perspective: 0.0002,
+                      diameterRatio: 0.5,
                       physics: const FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
                         childCount: 13,
@@ -96,8 +97,8 @@ WorkTimeSelectRouteBuilder(
                       },
                       controller: controllerMin,
                       itemExtent: 50,
-                      perspective: 0.003,
-                      diameterRatio: 0.7,
+                      perspective: 0.0002,
+                      diameterRatio: 0.5,
                       physics: const FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
                         childCount: 60,
@@ -126,8 +127,8 @@ WorkTimeSelectRouteBuilder(
                       },
                       controller: controllerSec,
                       itemExtent: 50,
-                      perspective: 0.003,
-                      diameterRatio: 0.7,
+                      perspective: 0.0002,
+                      diameterRatio: 0.5,
                       physics: const FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
                         childCount: 60,
@@ -223,8 +224,7 @@ RestTimeSelectRouteBuilder(
     pageBuilder: (BuildContext context, _, __) {
       return AlertDialog(
         backgroundColor: setColorScheme(numScheme: numColorScheme, numcolor: 0),
-        elevation: 10,
-        shadowColor: Colors.black,
+        elevation: 1,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
             side: BorderSide(
@@ -237,7 +237,7 @@ RestTimeSelectRouteBuilder(
           ),
         ),
         content: SizedBox(
-          height: 400,
+          height: 300,
           width: 400,
           child: Stack(
             children: [
@@ -266,8 +266,8 @@ RestTimeSelectRouteBuilder(
                       },
                       controller: controllerHour,
                       itemExtent: 50,
-                      perspective: 0.003,
-                      diameterRatio: 0.7,
+                      perspective: 0.0002,
+                      diameterRatio: 0.5,
                       physics: const FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
                         childCount: 13,
@@ -296,8 +296,8 @@ RestTimeSelectRouteBuilder(
                       },
                       controller: controllerMin,
                       itemExtent: 50,
-                      perspective: 0.003,
-                      diameterRatio: 0.7,
+                      perspective: 0.0002,
+                      diameterRatio: 0.5,
                       physics: const FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
                         childCount: 60,
@@ -326,8 +326,8 @@ RestTimeSelectRouteBuilder(
                       },
                       controller: controllerSec,
                       itemExtent: 50,
-                      perspective: 0.003,
-                      diameterRatio: 0.7,
+                      perspective: 0.0002,
+                      diameterRatio: 0.5,
                       physics: const FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
                         childCount: 60,

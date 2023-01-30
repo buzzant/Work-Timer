@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/constants/date.dart';
@@ -30,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int userWorkTime = 999;
   int userRestTime = 999;
   int totalSeconds = 9999;
+  String userAlarmSound = 'analog_alarm1';
+  late AudioPlayer _player;
 
   initPrefs() {
     SharedPreferences.getInstance().then((value) {
@@ -41,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         userWorkTime = value.getInt('userWorkTime') ?? 1500;
         userRestTime = value.getInt('userRestTime') ?? 300;
         totalSeconds = userWorkTime;
+        userAlarmSound = value.getString('userAlarmSound') ?? 'no_sound';
         devtools.log('home screen : ${userColorScheme.toString()}');
       });
     });
@@ -58,12 +62,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 400),
       vsync: this,
     );
+    _player = AudioPlayer();
     super.initState();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _player.dispose();
     super.dispose();
   }
 
@@ -76,6 +82,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       devtools.log('today : $userTodayWorkTime , total : $userTotalWorkTime');
     }
     if (totalSeconds == 0) {
+      if (userAlarmSound != 'no_sound') {
+        await _player.play(AssetSource('audio/$userAlarmSound.mp3'));
+      }
       setState(() {
         if (isWorking) {
           isWorking = !isWorking;
