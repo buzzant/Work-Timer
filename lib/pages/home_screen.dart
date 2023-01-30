@@ -16,10 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  static const workTime = 10;
-  static const restTime = 10;
-
-  int totalSeconds = workTime;
   int totalPomodoros = 0;
   bool isRunning = false;
   bool isWorking = true;
@@ -31,6 +27,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int userTotalWorkTime = 9999;
   int userTodayWorkTime = 9999;
   int userColorScheme = 999;
+  int userWorkTime = 999;
+  int userRestTime = 999;
+  int totalSeconds = 9999;
 
   initPrefs() {
     SharedPreferences.getInstance().then((value) {
@@ -39,6 +38,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         userTotalWorkTime = value.getInt('userTotalWorkTime') ?? 0;
         userTodayWorkTime = value.getInt(getDate()) ?? 0;
         userColorScheme = value.getInt('userColorScheme') ?? 0;
+        userWorkTime = value.getInt('userWorkTime') ?? 1500;
+        userRestTime = value.getInt('userRestTime') ?? 300;
+        totalSeconds = userWorkTime;
         devtools.log('home screen : ${userColorScheme.toString()}');
       });
     });
@@ -66,10 +68,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void onTick(Timer timer) async {
-    // int userTotalPomodoros = prefs.getInt('userTotalPomodoros') ?? 0;
-    // int userTotalWorkTime = prefs.getInt('userTotalWorkTime') ?? 0;
-    // int userTodayWorkTime = prefs.getInt(getDate()) ?? 0;
-    if (totalSeconds % 60 == 0 && isWorking && totalSeconds != workTime) {
+    if (totalSeconds % 60 == 0 && isWorking && totalSeconds != userWorkTime) {
       userTotalWorkTime = userTotalWorkTime + 1;
       userTodayWorkTime = userTodayWorkTime + 1;
       await prefs.setInt('userTotalWorkTime', userTotalWorkTime);
@@ -80,12 +79,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       setState(() {
         if (isWorking) {
           isWorking = !isWorking;
-          totalSeconds = restTime;
+          totalSeconds = userRestTime;
           totalPomodoros = totalPomodoros + 1;
           userTotalPomodoros = userTotalPomodoros + 1;
         } else {
           isWorking = !isWorking;
-          totalSeconds = workTime;
+          totalSeconds = userWorkTime;
         }
       });
       await prefs.setInt('userTotalPomodoros', userTotalPomodoros);
@@ -121,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _controller.reverse();
       }
       isWorking = true;
-      totalSeconds = workTime;
+      totalSeconds = userWorkTime;
       totalPomodoros = 0;
       turns -= 1;
     });
@@ -129,7 +128,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
-    return duration.toString().substring(2, 7);
+    if (seconds < 3600) {
+      return duration.toString().substring(2, 7);
+    } else {
+      return duration.toString().substring(0, 7);
+    }
   }
 
   Color setColor(int numColorScheme, bool isWorking) {
@@ -202,8 +205,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     SharedPreferences.getInstance().then((value) {
                       setState(() {
                         userColorScheme = value.getInt('userColorScheme') ?? 0;
+                        userWorkTime = value.getInt('userWorkTime') ?? 1500;
+                        userRestTime = value.getInt('userRestTime') ?? 300;
+                        totalSeconds = userWorkTime;
+                        if (isRunning) {
+                          isRunning = false;
+                          _controller.reverse();
+                        }
+                        timer.cancel();
+                        isWorking = true;
+                        totalPomodoros = 0;
+
                         devtools.log(
-                            'exit settings : ${userColorScheme.toString()}');
+                            'exit settings : ${userColorScheme.toString()}, ${userWorkTime.toString()}, ${userRestTime.toString()}, ');
                       });
                     });
                   }),
@@ -278,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     children: [
                       CircularProgressIndicator(
                         value: totalSeconds.toDouble() /
-                            (isWorking ? workTime : restTime),
+                            (isWorking ? userWorkTime : userRestTime),
                         strokeWidth: 15,
                         color: setColor(userColorScheme, isWorking),
                       ),

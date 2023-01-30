@@ -61,18 +61,6 @@ class _MyInfoPageState extends State<MyInfoPage> {
     return f.format(min).toString();
   }
 
-  // getUserTime(int cases) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   switch (cases) {
-  //     case 0:
-  //       return prefs.getInt('userTotalPomodors') ?? 0;
-  //     case 1:
-  //       return prefs.getInt('userTotalWorkTime') ?? 0;
-  //     default:
-  //       throw PreferencesDataNotFoundException();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Material(

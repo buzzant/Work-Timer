@@ -25,6 +25,12 @@ setColorScheme({required int numScheme, required int numcolor}) {
         case 6:
           //color for graph background
           return const Color(0xFF4E4637);
+        case 7:
+          //color for info text
+          return Colors.black;
+        case 8:
+          //work time color
+          return const Color(0xFFF98E72).withOpacity(0.15);
       }
       break;
     case 1:
@@ -43,6 +49,10 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFFF2DEBA).withOpacity(0.2);
         case 6:
           return const Color(0xFF4E4637);
+        case 7:
+          return Colors.black;
+        case 8:
+          return const Color(0xFF820000).withOpacity(0.15);
       }
       break;
 
@@ -62,6 +72,10 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFF282A3A).withOpacity(0.2);
         case 6:
           return const Color(0xFF604463);
+        case 7:
+          return Colors.white;
+        case 8:
+          return const Color(0xFFE38072).withOpacity(0.15);
       }
       break;
 
@@ -81,6 +95,10 @@ setColorScheme({required int numScheme, required int numcolor}) {
           return const Color(0xFF222831).withOpacity(0.2);
         case 6:
           return const Color(0xFF1F5063);
+        case 7:
+          return Colors.white;
+        case 8:
+          return const Color(0xFFE9B9D1).withOpacity(0.15);
       }
       break;
 

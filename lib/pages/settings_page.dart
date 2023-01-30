@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/dialogs/color_select_dialog.dart';
+import 'package:pomodoro_app/dialogs/time_slelect_dialog.dart';
+import 'package:pomodoro_app/exceptions/exceptions.dart';
 import 'package:pomodoro_app/widgets/color_select_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -14,12 +15,15 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   int userColorScheme = 999;
+  int userWorkTime = 999;
+  int userRestTime = 999;
 
   initPrefs() {
     SharedPreferences.getInstance().then((value) {
       setState(() {
         userColorScheme = value.getInt('userColorScheme') ?? 0;
-        devtools.log('settings page : ${userColorScheme.toString()}');
+        userWorkTime = value.getInt('userWorkTime') ?? 1500;
+        userRestTime = value.getInt('userRestTime') ?? 300;
       });
     });
   }
@@ -33,6 +37,19 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  int formatTime(int seconds, String format) {
+    switch (format) {
+      case 'hour':
+        return seconds ~/ 3600;
+      case 'min':
+        return (seconds % 3600) ~/ 60;
+      case 'sec':
+        return seconds % 60;
+      default:
+        throw FormatTimeException();
+    }
   }
 
   @override
@@ -219,6 +236,19 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ],
               ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(TimeSelectRouteBuilder(
+                      userColorScheme,
+                      formatTime(userWorkTime, 'hour'),
+                      formatTime(userWorkTime, 'min'),
+                      formatTime(userWorkTime, 'sec'),
+                    ))
+                    .then((value) => initPrefs());
+              },
+              child: const Text('time set'),
             )
           ],
         ),
