@@ -43,6 +43,7 @@ SoundSelectRouteBuilder(int numColorScheme, String currentSound) {
             borderRadius: BorderRadius.circular(40),
             side: BorderSide(
               color: setColorScheme(numScheme: numColorScheme, numcolor: 7),
+              width: 3,
             )),
         title: Text(
           'Set Sound',

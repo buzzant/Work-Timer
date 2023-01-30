@@ -12,12 +12,12 @@ ColorSelectRouteBuilder(int numColorScheme) {
     pageBuilder: (BuildContext context, _, __) {
       return AlertDialog(
         backgroundColor: setColorScheme(numScheme: numColorScheme, numcolor: 0),
-        elevation: 10,
-        shadowColor: Colors.black,
+        elevation: 1,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
           side: BorderSide(
             color: setColorScheme(numScheme: numColorScheme, numcolor: 7),
+            width: 3,
           ),
         ),
         title: Text(

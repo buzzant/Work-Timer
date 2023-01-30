@@ -30,6 +30,7 @@ WorkTimeSelectRouteBuilder(
             borderRadius: BorderRadius.circular(40),
             side: BorderSide(
               color: setColorScheme(numScheme: numColorScheme, numcolor: 7),
+              width: 3,
             )),
         title: Text(
           'Set Work Time',
@@ -229,6 +230,7 @@ RestTimeSelectRouteBuilder(
             borderRadius: BorderRadius.circular(40),
             side: BorderSide(
               color: setColorScheme(numScheme: numColorScheme, numcolor: 7),
+              width: 3,
             )),
         title: Text(
           'Set Rest Time',
