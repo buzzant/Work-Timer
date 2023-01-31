@@ -167,12 +167,16 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             Navigator.of(context)
                                 .push(WorkTimeSelectRouteBuilder(
-                                  userColorScheme,
-                                  formatTime(userWorkTime, 'hour'),
-                                  formatTime(userWorkTime, 'min'),
-                                  formatTime(userWorkTime, 'sec'),
-                                ))
-                                .then((value) => initPrefs());
+                              userColorScheme,
+                              formatTime(userWorkTime, 'hour'),
+                              formatTime(userWorkTime, 'min'),
+                              formatTime(userWorkTime, 'sec'),
+                            ))
+                                .then((value) {
+                              if (value == true) {
+                                initPrefs();
+                              }
+                            });
                           },
                           child: Container(
                             height: 35,
@@ -205,12 +209,16 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             Navigator.of(context)
                                 .push(RestTimeSelectRouteBuilder(
-                                  userColorScheme,
-                                  formatTime(userRestTime, 'hour'),
-                                  formatTime(userRestTime, 'min'),
-                                  formatTime(userRestTime, 'sec'),
-                                ))
-                                .then((value) => initPrefs());
+                              userColorScheme,
+                              formatTime(userRestTime, 'hour'),
+                              formatTime(userRestTime, 'min'),
+                              formatTime(userRestTime, 'sec'),
+                            ))
+                                .then((value) {
+                              if (value == true) {
+                                initPrefs();
+                              }
+                            });
                           },
                           child: Container(
                             height: 35,
@@ -272,7 +280,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Container(
                       decoration: BoxDecoration(
                         color: setColorScheme(
-                            numScheme: userColorScheme, numcolor: 4),
+                            numScheme: userColorScheme, numcolor: 0),
                         borderRadius: BorderRadius.circular(40),
                         border: Border.all(
                           width: 4,
@@ -280,7 +288,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ? setColorScheme(
                                   numScheme: userColorScheme, numcolor: 1)
                               : setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 0),
                         ),
                       ),
                       child: SizedBox(
@@ -304,7 +312,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Container(
                       decoration: BoxDecoration(
                         color: setColorScheme(
-                            numScheme: userColorScheme, numcolor: 4),
+                            numScheme: userColorScheme, numcolor: 0),
                         borderRadius: BorderRadius.circular(40),
                         border: Border.all(
                           width: 4,
@@ -312,7 +320,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ? setColorScheme(
                                   numScheme: userColorScheme, numcolor: 1)
                               : setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 0),
                         ),
                       ),
                       child: SizedBox(
@@ -345,7 +353,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Container(
                       decoration: BoxDecoration(
                         color: setColorScheme(
-                            numScheme: userColorScheme, numcolor: 4),
+                            numScheme: userColorScheme, numcolor: 0),
                         borderRadius: BorderRadius.circular(40),
                         border: Border.all(
                           width: 4,
@@ -353,7 +361,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ? setColorScheme(
                                   numScheme: userColorScheme, numcolor: 1)
                               : setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 0),
                         ),
                       ),
                       child: SizedBox(
@@ -377,7 +385,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Container(
                       decoration: BoxDecoration(
                         color: setColorScheme(
-                            numScheme: userColorScheme, numcolor: 4),
+                            numScheme: userColorScheme, numcolor: 0),
                         borderRadius: BorderRadius.circular(40),
                         border: Border.all(
                           width: 4,
@@ -385,7 +393,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ? setColorScheme(
                                   numScheme: userColorScheme, numcolor: 1)
                               : setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 4),
+                                  numScheme: userColorScheme, numcolor: 0),
                         ),
                       ),
                       child: SizedBox(

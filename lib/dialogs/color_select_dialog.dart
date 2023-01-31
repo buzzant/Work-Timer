@@ -8,7 +8,7 @@ ColorSelectRouteBuilder(int numColorScheme) {
     opaque: false,
     barrierDismissible: true,
     transitionDuration: const Duration(milliseconds: 500),
-    barrierColor: setColorScheme(numScheme: numColorScheme, numcolor: 5),
+    barrierColor: setColorScheme(numScheme: numColorScheme, numcolor: 4),
     pageBuilder: (BuildContext context, _, __) {
       return AlertDialog(
         backgroundColor: setColorScheme(numScheme: numColorScheme, numcolor: 0),

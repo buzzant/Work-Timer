@@ -12,6 +12,7 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   int userColorScheme = 999;
+  bool isShowLicense = false;
 
   initPrefs() {
     SharedPreferences.getInstance().then((value) {
@@ -70,7 +71,7 @@ class _AboutPageState extends State<AboutPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Designed and developed by ',
+                    'This app is developed by ',
                     style: TextStyle(
                         color: setColorScheme(
                             numScheme: userColorScheme, numcolor: 3),
@@ -85,29 +86,65 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                 ],
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                child: Text(
-                  '''The following sets forth attribution notices for third party software that may be contained in this application.
-                    \n\nfl_chart\nhttps://pub.dev/packages/fl_chart\nMIT License
-                    \nshared_preferences\nhttps://pub.dev/packages/shared_preferences\nBSD-3-Clause License
-                    \nintl\nhttps://pub.dev/packages/intl\nBSD-3-Clause License
-                    \naudioplayers\nhttps://pub.dev/packages/audioplayers\nMIT License
-                    \nimage\nhttps://pub.dev/packages/image\nMIT License
-                    \npixabay\nhttps://pixabay.com\nhttps://pixabay.com/service/terms/#license''',
-                  style: TextStyle(
-                    color:
-                        setColorScheme(numScheme: userColorScheme, numcolor: 3),
-                    fontSize: 15,
-                  ),
-                ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 60),
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          isShowLicense = !isShowLicense;
+                        });
+                      },
+                      child: Center(
+                        child: Text(
+                          isShowLicense
+                              ? 'Tap to hide Licences'
+                              : 'Tap to view Licenses',
+                          style: TextStyle(
+                            color: setColorScheme(
+                                numScheme: userColorScheme, numcolor: 3),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                child: Text(
-                  '''The 3-Clause BSD License
+              isShowLicense
+                  ? Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 50),
+                          child: Text(
+                            '''The following sets forth attribution notices for third party software that may be contained in this application.
+                        \n\nfl_chart\nhttps://pub.dev/packages/fl_chart\nMIT License
+                        \nshared_preferences\nhttps://pub.dev/packages/shared_preferences\nBSD-3-Clause License
+                        \nintl\nhttps://pub.dev/packages/intl\nBSD-3-Clause License
+                        \naudioplayers\nhttps://pub.dev/packages/audioplayers\nMIT License
+                        \nimage\nhttps://pub.dev/packages/image\nMIT License
+                        \npixabay\nhttps://pixabay.com\nhttps://pixabay.com/service/terms/#license
+                        \nflutter_native_splash\nhttps://pub.dev/packages/flutter_native_splash\nMIT License
+                        \nflutter_launcher_icons\nhttps://pub.dev/packages/flutter_launcher_icons\nMIT License''',
+                            style: TextStyle(
+                              color: isShowLicense
+                                  ? setColorScheme(
+                                      numScheme: userColorScheme, numcolor: 3)
+                                  : setColorScheme(
+                                      numScheme: userColorScheme, numcolor: 0),
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 50),
+                          child: Text(
+                            '''The 3-Clause BSD License
         
 SPDX short identifier: BSD-3-Clause
         
@@ -170,18 +207,18 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
         
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.''',
-                  style: TextStyle(
-                    color:
-                        setColorScheme(numScheme: userColorScheme, numcolor: 3),
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                child: Text(
-                  '''\n\nThe MIT License
+                            style: TextStyle(
+                              color: setColorScheme(
+                                  numScheme: userColorScheme, numcolor: 3),
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 50),
+                          child: Text(
+                            '''\n\nThe MIT License
 
 Copyright (c) <year> <copyright holders>
 
@@ -202,13 +239,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.''',
-                  style: TextStyle(
-                    color:
-                        setColorScheme(numScheme: userColorScheme, numcolor: 3),
-                    fontSize: 15,
-                  ),
-                ),
-              ),
+                            style: TextStyle(
+                              color: setColorScheme(
+                                  numScheme: userColorScheme, numcolor: 3),
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : SizedBox(
+                      height: 10,
+                    ),
             ],
           ),
         ),

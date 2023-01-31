@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int userWorkTime = 999;
   int userRestTime = 999;
   int totalSeconds = 9999;
+  int cnt = 0;
   String userAlarmSound = 'analog_alarm1';
   late AudioPlayer _player;
 
@@ -74,12 +75,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void onTick(Timer timer) async {
-    if (totalSeconds % 60 == 0 && isWorking && totalSeconds != userWorkTime) {
-      userTotalWorkTime = userTotalWorkTime + 1;
-      userTodayWorkTime = userTodayWorkTime + 1;
-      await prefs.setInt('userTotalWorkTime', userTotalWorkTime);
-      await prefs.setInt(getDate(), userTodayWorkTime);
-      devtools.log('today : $userTodayWorkTime , total : $userTotalWorkTime');
+    if (isWorking) {
+      cnt += 1;
+      if (cnt == 10) {
+        userTodayWorkTime += cnt;
+        userTotalWorkTime += cnt;
+        cnt = 0;
+        await prefs.setInt(getDate(), userTodayWorkTime);
+        await prefs.setInt('userTotalWorkTime', userTotalWorkTime);
+        devtools.log('today : $userTodayWorkTime , total : $userTotalWorkTime');
+      }
     }
     if (totalSeconds == 0) {
       if (userAlarmSound != 'no_sound') {
@@ -213,23 +218,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         builder: (context) => const SettingsPage(),
                       ),
                     );
+
                     SharedPreferences.getInstance().then((value) {
                       setState(() {
                         userColorScheme = value.getInt('userColorScheme') ?? 0;
-                        userWorkTime = value.getInt('userWorkTime') ?? 1500;
+                        int usernewWorkTime =
+                            value.getInt('userWorkTime') ?? 1500;
                         userRestTime = value.getInt('userRestTime') ?? 300;
-                        totalSeconds = userWorkTime;
-                        if (isRunning) {
-                          isRunning = false;
-                          _controller.reverse();
-                        }
-                        timer.cancel();
-                        isWorking = true;
-                        totalPomodoros = 0;
+
                         devtools.log(
                             'exit settings : ${userColorScheme.toString()}, ${userWorkTime.toString()}, ${userRestTime.toString()}, ');
+                        if (usernewWorkTime != userWorkTime) {
+                          if (isRunning) {
+                            isRunning = false;
+                            _controller.reverse();
+                          }
+                          timer.cancel();
+                          isWorking = true;
+                          totalPomodoros = 0;
+                          totalSeconds = usernewWorkTime;
+                          userWorkTime = usernewWorkTime;
+                        }
                       });
-                      initPrefs();
                     });
                   }),
               buildMenuItem(

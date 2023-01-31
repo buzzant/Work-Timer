@@ -16,6 +16,9 @@ WorkTimeSelectRouteBuilder(
   int newHour = selectedHour;
   int newMin = selectedMin;
   int newSec = selectedSec;
+  int oldHour = selectedHour;
+  int oldMin = selectedMin;
+  int oldSec = selectedSec;
 
   return PageRouteBuilder(
     opaque: false,
@@ -182,13 +185,19 @@ WorkTimeSelectRouteBuilder(
                       setColorScheme(numScheme: numColorScheme, numcolor: 1),
                 ));
               } else {
-                Navigator.of(context).pop(true);
-                SharedPreferences.getInstance().then((value) {
-                  value.setInt(
-                      'userWorkTime', newHour * 3600 + newMin * 60 + newSec);
-                  devtools
-                      .log((newHour * 3600 + newMin * 60 + newSec).toString());
-                });
+                if (newHour == oldHour &&
+                    newMin == oldMin &&
+                    newSec == oldSec) {
+                  Navigator.of(context).pop(false);
+                } else {
+                  Navigator.of(context).pop(true);
+                  SharedPreferences.getInstance().then((value) {
+                    value.setInt(
+                        'userWorkTime', newHour * 3600 + newMin * 60 + newSec);
+                    devtools.log(
+                        (newHour * 3600 + newMin * 60 + newSec).toString());
+                  });
+                }
               }
             },
             child: Text(
@@ -216,6 +225,9 @@ RestTimeSelectRouteBuilder(
   int newHour = selectedHour;
   int newMin = selectedMin;
   int newSec = selectedSec;
+  int oldHour = selectedHour;
+  int oldMin = selectedMin;
+  int oldSec = selectedSec;
 
   return PageRouteBuilder(
     opaque: false,
@@ -382,13 +394,19 @@ RestTimeSelectRouteBuilder(
                       setColorScheme(numScheme: numColorScheme, numcolor: 1),
                 ));
               } else {
-                Navigator.of(context).pop(true);
-                SharedPreferences.getInstance().then((value) {
-                  value.setInt(
-                      'userRestTime', newHour * 3600 + newMin * 60 + newSec);
-                  devtools
-                      .log((newHour * 3600 + newMin * 60 + newSec).toString());
-                });
+                if (newHour == oldHour &&
+                    newMin == oldMin &&
+                    newSec == oldSec) {
+                  Navigator.of(context).pop(false);
+                } else {
+                  Navigator.of(context).pop(true);
+                  SharedPreferences.getInstance().then((value) {
+                    value.setInt(
+                        'userRestTime', newHour * 3600 + newMin * 60 + newSec);
+                    devtools.log(
+                        (newHour * 3600 + newMin * 60 + newSec).toString());
+                  });
+                }
               }
             },
             child: Text(

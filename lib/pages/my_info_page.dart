@@ -49,14 +49,14 @@ class _MyInfoPageState extends State<MyInfoPage> {
     super.initState();
   }
 
-  String formatHours(int minutes) {
-    int hour = minutes ~/ 60;
+  String formatHours(int seconds) {
+    int hour = seconds ~/ 3600;
     var f = NumberFormat('#######');
     return f.format(hour).toString();
   }
 
-  String formatMinutes(int minutes) {
-    int min = minutes % 60;
+  String formatMinutes(int seconds) {
+    int min = (seconds % 3600) ~/ 60;
     var f = NumberFormat('#######');
     return f.format(min).toString();
   }

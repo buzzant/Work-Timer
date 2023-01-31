@@ -123,7 +123,7 @@ class BarChartSample1State extends State<BarChartSample1> {
       x: x,
       barRods: [
         BarChartRodData(
-          toY: isTouched ? y + 1 : y,
+          toY: isTouched ? y * 1.1 : y,
           color: isTouched
               ? touchedBarColor
               : setColorScheme(numScheme: widget.userColorScheme, numcolor: 1),
@@ -133,7 +133,7 @@ class BarChartSample1State extends State<BarChartSample1> {
               : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: widget.workTimeList.reduce(max).toDouble() * 1.2,
+            toY: (widget.workTimeList.reduce(max) ~/ 60).toDouble() * 1.2,
             color: barBackgroundColor,
           ),
         ),
@@ -145,25 +145,25 @@ class BarChartSample1State extends State<BarChartSample1> {
   List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, widget.workTimeList[0].toDouble(),
+            return makeGroupData(0, (widget.workTimeList[0] ~/ 60).toDouble(),
                 isTouched: i == touchedIndex);
           case 1:
-            return makeGroupData(1, widget.workTimeList[1].toDouble(),
+            return makeGroupData(1, (widget.workTimeList[1] ~/ 60).toDouble(),
                 isTouched: i == touchedIndex);
           case 2:
-            return makeGroupData(2, widget.workTimeList[2].toDouble(),
+            return makeGroupData(2, (widget.workTimeList[2] ~/ 60).toDouble(),
                 isTouched: i == touchedIndex);
           case 3:
-            return makeGroupData(3, widget.workTimeList[3].toDouble(),
+            return makeGroupData(3, (widget.workTimeList[3] ~/ 60).toDouble(),
                 isTouched: i == touchedIndex);
           case 4:
-            return makeGroupData(4, widget.workTimeList[4].toDouble(),
+            return makeGroupData(4, (widget.workTimeList[4] ~/ 60).toDouble(),
                 isTouched: i == touchedIndex);
           case 5:
-            return makeGroupData(5, widget.workTimeList[5].toDouble(),
+            return makeGroupData(5, (widget.workTimeList[5] ~/ 60).toDouble(),
                 isTouched: i == touchedIndex);
           case 6:
-            return makeGroupData(6, widget.workTimeList[6].toDouble(),
+            return makeGroupData(6, (widget.workTimeList[6] ~/ 60).toDouble(),
                 isTouched: i == touchedIndex);
           default:
             return throw Error();
