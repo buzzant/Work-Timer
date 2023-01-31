@@ -7,7 +7,6 @@ import 'package:pomodoro_app/pages/about_page.dart';
 import 'package:pomodoro_app/pages/my_info_page.dart';
 import 'package:pomodoro_app/pages/settings_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         userRestTime = value.getInt('userRestTime') ?? 300;
         totalSeconds = userWorkTime;
         userAlarmSound = value.getString('userAlarmSound') ?? 'no_sound';
-        devtools.log('home screen : ${userColorScheme.toString()}');
       });
     });
   }
@@ -83,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         cnt = 0;
         await prefs.setInt(getDate(), userTodayWorkTime);
         await prefs.setInt('userTotalWorkTime', userTotalWorkTime);
-        devtools.log('today : $userTodayWorkTime , total : $userTotalWorkTime');
       }
     }
     if (totalSeconds == 0) {
@@ -203,8 +200,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     SharedPreferences.getInstance().then((value) {
                       setState(() {
                         userColorScheme = value.getInt('userColorScheme') ?? 0;
-                        devtools
-                            .log('exit info : ${userColorScheme.toString()}');
                       });
                     });
                   }),
@@ -225,9 +220,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         int usernewWorkTime =
                             value.getInt('userWorkTime') ?? 1500;
                         userRestTime = value.getInt('userRestTime') ?? 300;
-
-                        devtools.log(
-                            'exit settings : ${userColorScheme.toString()}, ${userWorkTime.toString()}, ${userRestTime.toString()}, ');
                         if (usernewWorkTime != userWorkTime) {
                           if (isRunning) {
                             isRunning = false;
@@ -256,8 +248,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     SharedPreferences.getInstance().then((value) {
                       setState(() {
                         userColorScheme = value.getInt('userColorScheme') ?? 0;
-                        devtools
-                            .log('exit about : ${userColorScheme.toString()}');
                       });
                     });
                   }),
@@ -293,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     format(totalSeconds),
                     style: TextStyle(
                       color: setColor(userColorScheme, isWorking),
-                      fontSize: 89,
+                      fontSize: 80,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -334,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             child: AnimatedIcon(
                               icon: AnimatedIcons.play_pause,
                               progress: _controller,
-                              size: 75,
+                              size: 70,
                               color: setColor(userColorScheme, isWorking),
                             ),
                           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/widgets/time_scroll_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 WorkTimeSelectRouteBuilder(
     int numColorScheme, int selectedHour, int selectedMin, int selectedSec) {
@@ -194,8 +193,6 @@ WorkTimeSelectRouteBuilder(
                   SharedPreferences.getInstance().then((value) {
                     value.setInt(
                         'userWorkTime', newHour * 3600 + newMin * 60 + newSec);
-                    devtools.log(
-                        (newHour * 3600 + newMin * 60 + newSec).toString());
                   });
                 }
               }
@@ -403,8 +400,6 @@ RestTimeSelectRouteBuilder(
                   SharedPreferences.getInstance().then((value) {
                     value.setInt(
                         'userRestTime', newHour * 3600 + newMin * 60 + newSec);
-                    devtools.log(
-                        (newHour * 3600 + newMin * 60 + newSec).toString());
                   });
                 }
               }

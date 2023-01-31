@@ -214,8 +214,8 @@ class BarChartSample1State extends State<BarChartSample1> {
               children: <TextSpan>[
                 TextSpan(
                   text: formatHours((rod.toY - 1).toInt()) == '0'
-                      ? '${(formatMinutes((rod.toY - 1).toInt()))}min'
-                      : '${(formatHours((rod.toY - 1).toInt()))}hours ${(formatMinutes((rod.toY - 1).toInt()))}min',
+                      ? '${(formatMinutes((rod.toY - 1).toInt()))}m'
+                      : '${(formatHours((rod.toY - 1).toInt()))}h ${(formatMinutes((rod.toY - 1).toInt()))}m',
                   style: TextStyle(
                     color: setColorScheme(
                         numScheme: widget.userColorScheme, numcolor: 1),

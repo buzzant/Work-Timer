@@ -112,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           style: TextStyle(
                             color: setColorScheme(
                                 numScheme: userColorScheme, numcolor: 1),
-                            fontSize: 50,
+                            fontSize: 40,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -124,7 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           style: TextStyle(
                             color: setColorScheme(
                                 numScheme: userColorScheme, numcolor: 2),
-                            fontSize: 50,
+                            fontSize: 40,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -140,7 +140,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           style: TextStyle(
                             color: setColorScheme(
                                 numScheme: userColorScheme, numcolor: 1),
-                            fontSize: 50,
+                            fontSize: 40,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -152,7 +152,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           style: TextStyle(
                             color: setColorScheme(
                                 numScheme: userColorScheme, numcolor: 2),
-                            fontSize: 50,
+                            fontSize: 40,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -193,7 +193,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Text(
                                 'Change',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: setColorScheme(
                                       numScheme: userColorScheme, numcolor: 3),
@@ -235,7 +235,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: Text(
                                 'Change',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: setColorScheme(
                                       numScheme: userColorScheme, numcolor: 3),
@@ -427,43 +427,46 @@ class _SettingsPageState extends State<SettingsPage> {
                   endIndent: 15,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .push(SoundSelectRouteBuilder(
-                            userColorScheme,
-                            userAlarmSound,
-                          ))
-                          .then((value) => initPrefs());
-                    },
-                    child: Container(
-                      height: 35,
-                      width: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: setColorScheme(
-                              numScheme: userColorScheme, numcolor: 3),
-                          width: 3,
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Change Sound',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(SoundSelectRouteBuilder(
+                              userColorScheme,
+                              userAlarmSound,
+                            ))
+                            .then((value) => initPrefs());
+                      },
+                      child: Container(
+                        height: 35,
+                        width: 130,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
                             color: setColorScheme(
                                 numScheme: userColorScheme, numcolor: 3),
+                            width: 3,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Change Sound',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: setColorScheme(
+                                  numScheme: userColorScheme, numcolor: 3),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

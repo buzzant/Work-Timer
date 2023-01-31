@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
@@ -18,7 +17,6 @@ class _AboutPageState extends State<AboutPage> {
     SharedPreferences.getInstance().then((value) {
       setState(() {
         userColorScheme = value.getInt('userColorScheme') ?? 0;
-        devtools.log('about page : ${userColorScheme.toString()}');
       });
     });
   }

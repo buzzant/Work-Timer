@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/widgets/sound_scroll_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 SoundSelectRouteBuilder(int numColorScheme, String currentSound) {
   final List<String> soundList = [
@@ -132,7 +131,6 @@ SoundSelectRouteBuilder(int numColorScheme, String currentSound) {
               Navigator.of(context).pop(true);
               SharedPreferences.getInstance().then((value) {
                 value.setString('userAlarmSound', newSound);
-                devtools.log(newSound);
               });
             },
             child: Text(

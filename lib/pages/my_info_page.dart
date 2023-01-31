@@ -4,7 +4,6 @@ import 'package:pomodoro_app/constants/color_scheme.dart';
 import 'package:pomodoro_app/constants/date.dart';
 import 'package:pomodoro_app/widgets/bar_chart_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as devtools show log;
 
 class MyInfoPage extends StatefulWidget {
   const MyInfoPage({super.key});
@@ -27,8 +26,6 @@ class _MyInfoPageState extends State<MyInfoPage> {
         userTotalPomodoros = value.getInt('userTotalPomodoros') ?? 0;
         userTotalWorkTime = value.getInt('userTotalWorkTime') ?? 0;
         userColorScheme = value.getInt('userColorScheme') ?? 0;
-        devtools.log('info page : ${userColorScheme.toString()}');
-        //below needs work
       });
     });
   }
@@ -37,7 +34,6 @@ class _MyInfoPageState extends State<MyInfoPage> {
     SharedPreferences.getInstance().then((value) {
       for (int i = 6; i >= 0; i--) {
         workTimeList.add(value.getInt(getPreviousDate(i)) ?? 0);
-        devtools.log((value.getInt(getPreviousDate(i)) ?? 0).toString());
       }
     });
   }
@@ -90,105 +86,105 @@ class _MyInfoPageState extends State<MyInfoPage> {
           backgroundColor:
               setColorScheme(numScheme: userColorScheme, numcolor: 0),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 50),
-            Row(
-              children: [
-                SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Total Sessions',
-                        style: TextStyle(
-                          color: setColorScheme(
-                              numScheme: userColorScheme, numcolor: 3),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 50),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Total Sessions',
+                          style: TextStyle(
+                            color: setColorScheme(
+                                numScheme: userColorScheme, numcolor: 3),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            userTotalPomodoros.toString(),
-                            style: TextStyle(
-                              color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 1),
-                              fontSize: 50,
-                              fontWeight: FontWeight.w500,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              userTotalPomodoros.toString(),
+                              style: TextStyle(
+                                color: setColorScheme(
+                                    numScheme: userColorScheme, numcolor: 1),
+                                fontSize: 50,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Total Work Time',
-                        style: TextStyle(
-                          color: setColorScheme(
-                              numScheme: userColorScheme, numcolor: 3),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
+                          ],
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            formatHours(userTotalWorkTime),
-                            style: TextStyle(
-                              color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 1),
-                              fontSize: 50,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            'h ',
-                            style: TextStyle(
-                              color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 3),
-                              fontSize: 50,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            formatMinutes(userTotalWorkTime),
-                            style: TextStyle(
-                              color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 1),
-                              fontSize: 50,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            'm ',
-                            style: TextStyle(
-                              color: setColorScheme(
-                                  numScheme: userColorScheme, numcolor: 3),
-                              fontSize: 50,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Center(
-              child: Column(
+                  SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Total Work Time',
+                          style: TextStyle(
+                            color: setColorScheme(
+                                numScheme: userColorScheme, numcolor: 3),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              formatHours(userTotalWorkTime),
+                              style: TextStyle(
+                                color: setColorScheme(
+                                    numScheme: userColorScheme, numcolor: 1),
+                                fontSize: 50,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              'h ',
+                              style: TextStyle(
+                                color: setColorScheme(
+                                    numScheme: userColorScheme, numcolor: 3),
+                                fontSize: 50,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              formatMinutes(userTotalWorkTime),
+                              style: TextStyle(
+                                color: setColorScheme(
+                                    numScheme: userColorScheme, numcolor: 1),
+                                fontSize: 50,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              'm ',
+                              style: TextStyle(
+                                color: setColorScheme(
+                                    numScheme: userColorScheme, numcolor: 3),
+                                fontSize: 50,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
@@ -209,8 +205,8 @@ class _MyInfoPageState extends State<MyInfoPage> {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
