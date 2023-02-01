@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/widgets/sound_scroll_widget.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/widgets/sound_scroll_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SoundSelectRouteBuilder(int numColorScheme, String currentSound) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/dialogs/color_select_dialog.dart';
-import 'package:pomodoro_app/dialogs/sound_select_dialog.dart';
-import 'package:pomodoro_app/dialogs/time_slelect_dialog.dart';
-import 'package:pomodoro_app/exceptions/exceptions.dart';
-import 'package:pomodoro_app/widgets/color_select_widget.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/dialogs/color_select_dialog.dart';
+import 'package:work_timer/dialogs/sound_select_dialog.dart';
+import 'package:work_timer/dialogs/time_slelect_dialog.dart';
+import 'package:work_timer/exceptions/exceptions.dart';
+import 'package:work_timer/widgets/color_select_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {

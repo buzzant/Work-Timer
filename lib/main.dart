@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/pages/home_screen.dart';
+import 'package:work_timer/pages/home_screen.dart';
 
 void main() {
   runApp(const MyApp());

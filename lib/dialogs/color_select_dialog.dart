@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/widgets/color_select_widget.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/widgets/color_select_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ColorSelectRouteBuilder(int numColorScheme) {

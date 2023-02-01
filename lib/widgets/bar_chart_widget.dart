@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/constants/date.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/constants/date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BarChartSample1 extends StatefulWidget {

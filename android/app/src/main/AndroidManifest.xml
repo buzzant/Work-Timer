@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pomodoro_app">
+    package="com.tistory.buzzantlabs.work_timer">
    <application
    
-        android:label="pomodoro_app"
+        android:label="Work Timer"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <meta-data

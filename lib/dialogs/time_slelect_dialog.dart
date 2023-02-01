@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/widgets/time_scroll_widgets.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/widgets/time_scroll_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 WorkTimeSelectRouteBuilder(

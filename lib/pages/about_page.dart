@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
+import 'package:work_timer/constants/color_scheme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AboutPage extends StatefulWidget {

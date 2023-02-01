@@ -1,4 +1,4 @@
-package com.example.pomodoro_app
+package com.tistory.buzzantlabs.work_timer
 
 import io.flutter.embedding.android.FlutterActivity
 

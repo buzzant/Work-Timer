@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/pages/my_info_page.dart';
-import 'package:pomodoro_app/pages/settings_page.dart';
-import 'package:pomodoro_app/pages/about_page.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/pages/my_info_page.dart';
+import 'package:work_timer/pages/settings_page.dart';
+import 'package:work_timer/pages/about_page.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20);

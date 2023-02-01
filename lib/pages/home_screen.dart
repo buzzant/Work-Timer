@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/constants/date.dart';
-import 'package:pomodoro_app/pages/about_page.dart';
-import 'package:pomodoro_app/pages/my_info_page.dart';
-import 'package:pomodoro_app/pages/settings_page.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/constants/date.dart';
+import 'package:work_timer/pages/about_page.dart';
+import 'package:work_timer/pages/my_info_page.dart';
+import 'package:work_timer/pages/settings_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,14 +16,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  int totalPomodoros = 0;
+  int totalSessions = 0;
   bool isRunning = false;
   bool isWorking = true;
   double turns = 0.0;
   late Timer timer;
   late AnimationController _controller;
   late SharedPreferences prefs;
-  int userTotalPomodoros = 9999;
+  int userTotalSessions = 9999;
   int userTotalWorkTime = 9999;
   int userTodayWorkTime = 9999;
   int userColorScheme = 999;
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   initPrefs() {
     SharedPreferences.getInstance().then((value) {
       setState(() {
-        userTotalPomodoros = value.getInt('userTotalPomodoros') ?? 0;
+        userTotalSessions = value.getInt('userTotalSessions') ?? 0;
         userTotalWorkTime = value.getInt('userTotalWorkTime') ?? 0;
         userTodayWorkTime = value.getInt(getDate()) ?? 0;
         userColorScheme = value.getInt('userColorScheme') ?? 0;
@@ -91,14 +91,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         if (isWorking) {
           isWorking = !isWorking;
           totalSeconds = userRestTime;
-          totalPomodoros = totalPomodoros + 1;
-          userTotalPomodoros = userTotalPomodoros + 1;
+          totalSessions = totalSessions + 1;
+          userTotalSessions = userTotalSessions + 1;
         } else {
           isWorking = !isWorking;
           totalSeconds = userWorkTime;
         }
       });
-      await prefs.setInt('userTotalPomodoros', userTotalPomodoros);
+      await prefs.setInt('userTotalSessions', userTotalSessions);
     } else {
       setState(() {
         totalSeconds = totalSeconds - 1;
@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       }
       isWorking = true;
       totalSeconds = userWorkTime;
-      totalPomodoros = 0;
+      totalSessions = 0;
       turns -= 1;
     });
   }
@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           }
                           timer.cancel();
                           isWorking = true;
-                          totalPomodoros = 0;
+                          totalSessions = 0;
                           totalSeconds = usernewWorkTime;
                           userWorkTime = usernewWorkTime;
                         }
@@ -384,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ),
                         ),
                         Text(
-                          '$totalPomodoros',
+                          '$totalSessions',
                           style: TextStyle(
                             fontSize: 58,
                             fontWeight: FontWeight.w600,

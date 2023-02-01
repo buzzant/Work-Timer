@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
+import 'package:work_timer/constants/color_scheme.dart';
 
 class TimeHours extends StatelessWidget {
   int hours;

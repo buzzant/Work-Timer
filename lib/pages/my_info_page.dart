@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:pomodoro_app/constants/color_scheme.dart';
-import 'package:pomodoro_app/constants/date.dart';
-import 'package:pomodoro_app/widgets/bar_chart_widget.dart';
+import 'package:work_timer/constants/color_scheme.dart';
+import 'package:work_timer/constants/date.dart';
+import 'package:work_timer/widgets/bar_chart_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyInfoPage extends StatefulWidget {
@@ -13,7 +13,7 @@ class MyInfoPage extends StatefulWidget {
 }
 
 class _MyInfoPageState extends State<MyInfoPage> {
-  int userTotalPomodoros = 9999;
+  int userTotalSessions = 9999;
   int userTotalWorkTime = 9999;
   int userColorScheme = 999;
 
@@ -23,7 +23,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
   initPrefs() {
     SharedPreferences.getInstance().then((value) {
       setState(() {
-        userTotalPomodoros = value.getInt('userTotalPomodoros') ?? 0;
+        userTotalSessions = value.getInt('userTotalSessions') ?? 0;
         userTotalWorkTime = value.getInt('userTotalWorkTime') ?? 0;
         userColorScheme = value.getInt('userColorScheme') ?? 0;
       });
@@ -111,7 +111,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              userTotalPomodoros.toString(),
+                              userTotalSessions.toString(),
                               style: TextStyle(
                                 color: setColorScheme(
                                     numScheme: userColorScheme, numcolor: 1),
